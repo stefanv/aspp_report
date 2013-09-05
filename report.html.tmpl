@@ -1,0 +1,109 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="aspp.css" type="text/css" media="screen"/>
+
+    <style type="text/css">
+
+    @import url('http://fonts.googleapis.com/css?family=Droid+Sans:400,700');
+
+    body {
+        font-family: 'Droid Sans', sans-serif;
+    }
+
+    table {
+        width: {{table_width}}px;
+    }
+
+    .bar {
+        width: {{(width + 2) * N}}px;
+    }
+
+    .block0,
+    .block1,
+    .block2 {
+        float: left;
+        border: solid 1px white;
+        overflow: hidden;
+        display: inline-block;
+
+        margin: 0;
+        padding: 0;
+
+        width: {{width}}px;
+        height: {{height}}px;
+    }
+
+    .block0 {
+        background-color: #4DE17D;
+    }
+
+    .block1 {
+        background-color: #CBC535;
+    }
+
+    .block2 {
+        background-color: E86F75;
+    }
+
+    .left-label {
+        text-align: right;
+    }
+
+    .right-label {
+        text-align: left;
+    }
+
+    </style>
+
+
+    </head>
+<body>
+
+<table>
+
+{{py:
+
+left_labels, values, right_labels = bars
+
+}}
+
+
+  {{for n, lvr in enumerate(zip(left_labels,
+                                values,
+                                right_labels))}}
+
+    {{py:
+
+left, values, right = lvr
+
+    }}
+
+    <tr>
+    <td class='left-label'>{{ left }}</td>
+
+
+    <td>
+
+    <div class="bar">
+
+    {{for i, v in enumerate(values)}}
+      {{for j in range(v)}}
+          <div class={{"block%d" % i}}>&nbsp;</div>
+      {{endfor}}
+    {{endfor}}
+
+    </div>
+
+    </td>
+
+
+    <td class='right-label'>{{ right }}</td>
+    </tr>
+
+  {{endfor}}
+
+</table>
+
+</body>
+</html>
+
